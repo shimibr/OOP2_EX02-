@@ -87,27 +87,10 @@ void HotelBookingForm::render(sf::RenderWindow& window) {
 
         roomTypeButtonX += 160;  // ✅ Increased spacing
     }
-    // ✅ "Done" Button
-    sf::RectangleShape submitButton(sf::Vector2f(140, 40));
-    submitButton.setPosition(20, 570);
-    submitButton.setFillColor(sf::Color(50, 150, 50));  // ✅ Green color
-    window.draw(submitButton);
 
-    sf::Text submitText("DONE", font, 20);
-    submitText.setFillColor(sf::Color::White);
-    submitText.setPosition(50, 580);
-    window.draw(submitText);
+    m_yOffset = yOffset + 40;
 
-    // ✅ "Cancel" Button
-    sf::RectangleShape cancelButton(sf::Vector2f(140, 40));
-    cancelButton.setPosition(200, 570);
-    cancelButton.setFillColor(sf::Color(180, 0, 0));  // ✅ Red color
-    window.draw(cancelButton);
-
-    sf::Text cancelText("CANCEL", font, 20);
-    cancelText.setFillColor(sf::Color::White);
-    cancelText.setPosition(230, 580);
-    window.draw(cancelText);
+    BookingForm::render(window);
 
 }
 

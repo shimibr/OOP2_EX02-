@@ -25,3 +25,9 @@ void RectanglText::drawRec(sf::RenderWindow& Window)
 	Window.draw(m_Rectangle);
 	Window.draw(m_Text);
 }
+//=======================================
+void RectanglText::setOutline(sf::Color color)
+{
+	m_Rectangle.setOutlineThickness(2);
+	m_Rectangle.setOutlineColor(color);
+}

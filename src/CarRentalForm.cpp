@@ -91,27 +91,9 @@ void CarRentalForm::render(sf::RenderWindow& window) {
         carTypeButtonX += 105;  // ✅ Increased spacing
     }
     // ✅ "Done" and "Cancel" Buttons (positioned dynamically)
-    int buttonY = yOffset + 40;
+    m_yOffset = yOffset + 40;
 
-    sf::RectangleShape submitButton(sf::Vector2f(140, 40));
-    submitButton.setPosition(20, buttonY);
-    submitButton.setFillColor(sf::Color(50, 150, 50));
-    window.draw(submitButton);
-
-    sf::Text submitText("DONE", font, 20);
-    submitText.setFillColor(sf::Color::White);
-    submitText.setPosition(50, buttonY + 10);
-    window.draw(submitText);
-
-    sf::RectangleShape cancelButton(sf::Vector2f(140, 40));
-    cancelButton.setPosition(200, buttonY);
-    cancelButton.setFillColor(sf::Color(180, 0, 0));
-    window.draw(cancelButton);
-
-    sf::Text cancelText("CANCEL", font, 20);
-    cancelText.setFillColor(sf::Color::White);
-    cancelText.setPosition(230, buttonY + 10);
-    window.draw(cancelText);
+    BookingForm::render(window);
 }
 
 void CarRentalForm::handleInput(sf::Event event) {

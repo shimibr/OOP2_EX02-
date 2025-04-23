@@ -2,6 +2,7 @@
 #include "DialogueManager.h"
 #include <iostream>
 #include <ctime>  // For getting current date
+#include <RectanglText.h>
 
 TrainBookingForm::TrainBookingForm(sf::RenderWindow& win, DialogueManager* manager)
     : BookingForm(win, manager) {  // ✅ Calls base constructor
@@ -97,17 +98,13 @@ void TrainBookingForm::render(sf::RenderWindow& window) {
 			// ✅ Special Selection Buttons
             float specialX = 10;
             for (std::size_t i = 0; i < specialSelection.size(); ++i) {
-                sf::RectangleShape sButton(sf::Vector2f(150, 30));
-                sButton.setPosition(specialX, yOffset);
-                sButton.setFillColor(specialSelection[i].second ? sf::Color(0, 120, 255) : sf::Color::White);
-                sButton.setOutlineThickness(2);
-                sButton.setOutlineColor(sf::Color(160, 160, 160));
-                window.draw(sButton);
 
-                sf::Text timeText(specialSelection[i].first, font, 16);
-                timeText.setFillColor(specialSelection[i].second ? sf::Color::White : sf::Color::Black);
-                timeText.setPosition(specialX + 10, yOffset + 2);
-                window.draw(timeText);
+                RectanglText sButton(16, sf::Vector2f(150, 30), sf::Vector2f(specialX, yOffset)
+                    , specialSelection[i].second ? sf::Color(0, 120, 255) : sf::Color::White,
+                    specialSelection[i].second ? sf::Color::White : sf::Color::Black, specialSelection[i].first);
+
+				sButton.setOutline(sf::Color(160, 160, 160));
+                sButton.drawRec(window);
 
                 specialX+= 160;  // ✅ Increased spacing between buttons
             }
@@ -116,28 +113,10 @@ void TrainBookingForm::render(sf::RenderWindow& window) {
       yOffset += 50;
     }
    
-    // ✅ "Done" and "Cancel" Buttons (positioned dynamically)
-    yOffset +=10;
 
-    sf::RectangleShape submitButton(sf::Vector2f(140, 40));
-    submitButton.setPosition(20, yOffset);
-    submitButton.setFillColor(sf::Color(50, 150, 50));
-    window.draw(submitButton);
+    m_yOffset = yOffset;
 
-    sf::Text submitText("DONE", font, 20);
-    submitText.setFillColor(sf::Color::White);
-    submitText.setPosition(50, yOffset + 10);
-    window.draw(submitText);
-
-    sf::RectangleShape cancelButton(sf::Vector2f(140, 40));
-    cancelButton.setPosition(200, yOffset);
-    cancelButton.setFillColor(sf::Color(180, 0, 0));
-    window.draw(cancelButton);
-
-    sf::Text cancelText("CANCEL", font, 20);
-    cancelText.setFillColor(sf::Color::White);
-    cancelText.setPosition(230, yOffset + 10);
-    window.draw(cancelText);
+    BookingForm::render(window);
 }
 
 void TrainBookingForm::handleInput(sf::Event event) {

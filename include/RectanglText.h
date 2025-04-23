@@ -8,9 +8,11 @@ class RectanglText
 {
 public:
 
-	RectanglText(const int sizeText, sf::Vector2f size, sf::Vector2f position, sf::Color ColorRec, sf::Color ColorText
-					,std::string text);
+	RectanglText(const int sizeText, sf::Vector2f size, sf::Vector2f position, sf::Color ColorRec, sf::Color ColorText,std::string text);
+
 	void drawRec(sf::RenderWindow& Window);
+	void setOutline(sf::Color color);
+	void setRectangleColor(sf::Color color) { m_Rectangle.setFillColor(color); }
 
 private:
 	sf::RectangleShape m_Rectangle;

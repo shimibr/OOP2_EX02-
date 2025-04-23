@@ -92,27 +92,9 @@ void FlightBookingForm::render(sf::RenderWindow& window) {
     }
 
 
-    // ✅ "Done" Button
-    sf::RectangleShape submitButton(sf::Vector2f(140, 40));
-    submitButton.setPosition(20, 550);
-    submitButton.setFillColor(sf::Color(50, 150, 50));  // ✅ Green color
-    window.draw(submitButton);
+    m_yOffset = yOffset + 50;
 
-    sf::Text submitText("DONE", font, 20);
-    submitText.setFillColor(sf::Color::White);
-    submitText.setPosition(50, 560);
-    window.draw(submitText);
-
-    // ✅ "Cancel" Button
-    sf::RectangleShape cancelButton(sf::Vector2f(140, 40));
-    cancelButton.setPosition(200, 550);
-    cancelButton.setFillColor(sf::Color(180, 0, 0));  // ✅ Red color
-    window.draw(cancelButton);
-
-    sf::Text cancelText("CANCEL", font, 20);
-    cancelText.setFillColor(sf::Color::White);
-    cancelText.setPosition(230, 560);
-    window.draw(cancelText);
+    BookingForm::render(window);
 
 }
 
