@@ -1,7 +1,9 @@
-﻿#include "BookingForm.h"
+﻿#pragma once
+#include "BookingForm.h"
 #include "DialogueManager.h"
 #include <iostream>
 #include <ctime>  // For getting current date
+#include "RectanglText.h"
 
 BookingForm::BookingForm(sf::RenderWindow& win, DialogueManager* manager) :window(win), formManager(manager) {
     fieldLabels = { "Name:", "ID:", "Address:", "Email:" };  // ✅ Add common fields
@@ -47,6 +49,7 @@ void BookingForm::openConfirmationWindow() {
 
         std::string bookingInfo;
         for (size_t i = 0; i < fieldLabels.size(); ++i) {
+            //פה צריך להכניס את הבדיקה
             bookingInfo += fieldLabels[i] + " " + userInput[i] + "\n";
         }
 
@@ -56,26 +59,15 @@ void BookingForm::openConfirmationWindow() {
         confirmWindow.draw(details);
 
         // ✅ Approve Button
-        sf::RectangleShape approveButton(sf::Vector2f(120, 40));
-        approveButton.setPosition(100, 300);
-        approveButton.setFillColor(sf::Color(50, 150, 50));
-        confirmWindow.draw(approveButton);
+		RectanglText approveText(18, sf::Vector2f(120, 40), sf::Vector2f(100, 300)
+                        , sf::Color(50, 150, 50), sf::Color::White, font, "APPROVE");
+        approveText.drawRec(confirmWindow);
 
-        sf::Text approveText("APPROVE", font, 18);
-        approveText.setFillColor(sf::Color::White);
-        approveText.setPosition(118, 310);
-        confirmWindow.draw(approveText);
 
         // ✅ Cancel Button
-        sf::RectangleShape cancelButton(sf::Vector2f(120, 40));
-        cancelButton.setPosition(280, 300);
-        cancelButton.setFillColor(sf::Color(180, 0, 0));
-        confirmWindow.draw(cancelButton);
-
-        sf::Text cancelText("CANCEL", font, 18);
-        cancelText.setFillColor(sf::Color::White);
-        cancelText.setPosition(305, 310);
-        confirmWindow.draw(cancelText);
+        RectanglText cancelButton(18, sf::Vector2f(120, 40), sf::Vector2f(280, 300)
+            , sf::Color(180, 0, 0), sf::Color::White, font, "CANCEL");
+        cancelButton.drawRec(confirmWindow);
 
         confirmWindow.display();
     }
