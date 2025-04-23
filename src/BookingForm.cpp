@@ -9,7 +9,20 @@ BookingForm::BookingForm(sf::RenderWindow& win, DialogueManager* manager) :windo
     fieldLabels = { "Name:", "ID:", "Address:", "Email:" };  // ✅ Add common fields
     userInput.resize(fieldLabels.size(), "");  // Initialize input fields
 }
+//==========================================
+void BookingForm::render(sf::RenderWindow& window)
+{
+    RectanglText submit(20, sf::Vector2f(140, 40), sf::Vector2f(20, m_yOffset)
+        , sf::Color(50, 150, 50), sf::Color::White, "DONE");
 
+    submit.drawRec(window);
+
+    RectanglText cancel(20, sf::Vector2f(140, 40), sf::Vector2f(200, m_yOffset)
+        , sf::Color(180, 0, 0), sf::Color::White, "CANCEL");
+
+    cancel.drawRec(window);
+}
+//==========================================
 void BookingForm::openConfirmationWindow() {
     const std::string& formTitle = getFormType();
     sf::RenderWindow confirmWindow(sf::VideoMode(500, 600), "Confirm " + formTitle);
@@ -60,13 +73,15 @@ void BookingForm::openConfirmationWindow() {
 
         // ✅ Approve Button
 		RectanglText approveText(18, sf::Vector2f(120, 40), sf::Vector2f(100, 300)
-                        , sf::Color(50, 150, 50), sf::Color::White, font, "APPROVE");
+                        , sf::Color(50, 150, 50), sf::Color::White, "APPROVE");
+
         approveText.drawRec(confirmWindow);
 
 
         // ✅ Cancel Button
         RectanglText cancelButton(18, sf::Vector2f(120, 40), sf::Vector2f(280, 300)
-            , sf::Color(180, 0, 0), sf::Color::White, font, "CANCEL");
+            , sf::Color(180, 0, 0), sf::Color::White, "CANCEL");
+
         cancelButton.drawRec(confirmWindow);
 
         confirmWindow.display();

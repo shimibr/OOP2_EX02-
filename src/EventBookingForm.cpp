@@ -2,6 +2,7 @@
 #include "DialogueManager.h"
 #include <iostream>
 #include <ctime>  // For getting current date
+#include <RectanglText.h>
 
 EventBookingForm::EventBookingForm(sf::RenderWindow& win, DialogueManager* manager)
     : BookingForm(win, manager) {  // ✅ Calls base constructor
@@ -89,27 +90,10 @@ void EventBookingForm::render(sf::RenderWindow& window) {
         seatingTypeButtonX += 160;  // ✅ Increased spacing
     }
     // ✅ "Done" and "Cancel" Buttons (positioned dynamically)
-     yOffset += 50;
+     m_yOffset = yOffset+50;
 
-    sf::RectangleShape submitButton(sf::Vector2f(140, 40));
-    submitButton.setPosition(20, yOffset);
-    submitButton.setFillColor(sf::Color(50, 150, 50));
-    window.draw(submitButton);
-
-    sf::Text submitText("DONE", font, 20);
-    submitText.setFillColor(sf::Color::White);
-    submitText.setPosition(50, yOffset + 10);
-    window.draw(submitText);
-
-    sf::RectangleShape cancelButton(sf::Vector2f(140, 40));
-    cancelButton.setPosition(200, yOffset);
-    cancelButton.setFillColor(sf::Color(180, 0, 0));
-    window.draw(cancelButton);
-
-    sf::Text cancelText("CANCEL", font, 20);
-    cancelText.setFillColor(sf::Color::White);
-    cancelText.setPosition(230, yOffset + 10);
-    window.draw(cancelText);
+     BookingForm::render(window);
+     
 }
 
 void EventBookingForm::handleInput(sf::Event event) {

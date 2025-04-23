@@ -21,6 +21,7 @@ protected:
     std::size_t activeField = 0;
     sf::Clock cursorTimer;
     bool showCursor = true;
+    int m_yOffset = 0;
 
     sf::RenderWindow& window;
     DialogueManager* formManager;
