@@ -2,6 +2,7 @@
 #define TRAINBOOKINGFORM_H
 
 #include "BookingForm.h"
+#include "RectangleToFill.h"
 
 class TrainBookingForm : public BookingForm {
 public:

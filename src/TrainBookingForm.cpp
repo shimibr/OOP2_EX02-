@@ -49,27 +49,18 @@ void TrainBookingForm::render(sf::RenderWindow& window) {
     // ✅ Render input fields dynamically
     int yOffset = 60;
     for (std::size_t i = 0; i < fieldLabels.size(); ++i) {
-        sf::Text label(fieldLabels[i], font, 18);
-        label.setFillColor(sf::Color(60, 60, 60));
-        label.setPosition(20, yOffset);
-        window.draw(label);
-
-        sf::RectangleShape inputBox(sf::Vector2f(350, 35));
-        inputBox.setPosition(240, yOffset - 5);
-        inputBox.setFillColor(sf::Color::White);
-        inputBox.setOutlineThickness(2);
-        inputBox.setOutlineColor(i == activeField ? sf::Color(0, 120, 255) : sf::Color(160, 160, 160));
-        window.draw(inputBox);
 
         std::string displayText = userInput[i];
         if (i == activeField && cursorVisible) {
             displayText += "|";
         }
 
-        sf::Text inputText(displayText, font, 16);
-        inputText.setFillColor(sf::Color::Black);
-        inputText.setPosition(245, yOffset);
-        window.draw(inputText);
+        RectangleToFill field(fieldLabels[i], 16, sf::Vector2f(350, 35), sf::Vector2f(240, yOffset - 5)
+            , sf::Color::White, sf::Color(60, 60, 60), displayText);
+        field.setOutline(i == activeField ? sf::Color(0, 120, 255) : sf::Color(160, 160, 160));
+
+        field.drawRec(window);
+
 
         if (i == 8)
         {
@@ -77,18 +68,15 @@ void TrainBookingForm::render(sf::RenderWindow& window) {
             // ✅ Time Selection Buttons
             float timeButtonX = 10;
             for (std::size_t i = 0; i < timeSelection.size(); ++i) {
-                sf::RectangleShape timeButton(sf::Vector2f(100, 30));
-                timeButton.setPosition(timeButtonX, yOffset);
-                timeButton.setFillColor(timeSelection[i].second ? sf::Color(0, 120, 255) : sf::Color::White);
-                timeButton.setOutlineThickness(2);
-                timeButton.setOutlineColor(sf::Color(160, 160, 160));
-                window.draw(timeButton);
 
-                sf::Text timeText(timeSelection[i].first, font, 16);
-                timeText.setFillColor(timeSelection[i].second ? sf::Color::White : sf::Color::Black);
-                timeText.setPosition(timeButtonX + 10, yOffset + 2);
-                window.draw(timeText);
+                RectanglText sButton(16, sf::Vector2f(100, 30), sf::Vector2f(timeButtonX, yOffset)
+                    , timeSelection[i].second ? sf::Color(0, 120, 255) : sf::Color::White,
+                    timeSelection[i].second ? sf::Color::White : sf::Color::Black, timeSelection[i].first);
 
+                sButton.setOutline(sf::Color(160, 160, 160));
+                sButton.drawRec(window);
+
+               
                 timeButtonX += 110;  // ✅ Increased spacing between buttons
             }
         } 
